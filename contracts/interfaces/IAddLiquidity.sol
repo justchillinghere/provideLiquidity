@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.18;
 
-interface IAddLiqudity {
+interface IAddLiquidity {
 	event AddedLiquidity(address TokenA,
 		address TokenB, 
 		address creator, 
