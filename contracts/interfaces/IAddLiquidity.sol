@@ -7,8 +7,8 @@ interface IAddLiqudity {
 		address creator, 
 		address LPpair);
 	
-	function AddLiquidity(address _TokenA,
+	function addLiquidity(address _TokenA,
 		address _TokenB,
-		uint256 amountA,
-		uint256 amountB) external returns(address);
+		uint256 _amountA,
+		uint256 _amountB) external returns (uint amountA, uint amountB, uint liquidity);
 }
