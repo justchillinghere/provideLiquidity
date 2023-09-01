@@ -9,7 +9,7 @@ import { config as dotenvConfig } from "dotenv";
 import { resolve } from "path";
 
 //tasks
-require('./tasks')
+require("./tasks");
 
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
 dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) });

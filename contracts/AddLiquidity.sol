@@ -19,18 +19,13 @@ contract AddLiquidity is IAddLiquidity {
         address _tokenB,
         uint256 _amountA,
         uint256 _amountB
-    ) external returns (uint amountA, uint amountB, uint liquidity) {
-        IERC20 tokenA = IERC20(_tokenA);
-        IERC20 tokenB = IERC20(_tokenB);
-		uint sentTokenA;
-		uint sentTokenB;
-		uint mintedLiquidity;
+    ) external returns (uint sentTokenA, uint sentTokenB, uint mintedLiquidity) {
         require(
-            tokenA.allowance(msg.sender, address(uniswapV2Router)) >= _amountA,
+            IERC20(_tokenA).allowance(msg.sender, address(uniswapV2Router)) >= _amountA,
             "Allowance for token A less than desired. Please approve the required amount"
         );
         require(
-            tokenB.allowance(msg.sender, address(uniswapV2Router)) >= _amountB,
+            IERC20(_tokenB).allowance(msg.sender, address(uniswapV2Router)) >= _amountB,
             "Allowance for token B less than desired. Please approve the required amount"
         );
         (sentTokenA, sentTokenB, mintedLiquidity) = uniswapV2Router.addLiquidity(
