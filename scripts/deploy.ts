@@ -20,7 +20,7 @@ async function main() {
   console.log(`MyContract contract deployed to ${myContract.address}`);
 
   console.log("wait of delay...");
-  await delay(15000); // delay 15 secons
+  await delay(30000); // delay 30 seconds
   console.log("starting verify token...");
   try {
     await run("verify:verify", {
@@ -29,6 +29,7 @@ async function main() {
       constructorArguments: [router, factory],
     });
     console.log("verify success");
+	return;
   } catch (e: any) {
     console.log(e.message);
   }

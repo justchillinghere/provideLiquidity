@@ -25,10 +25,10 @@ if (!rpcUrl) {
   throw new Error("Please set your RPC_URL in a .env file");
 }
 
-// export const contractAddress: string | undefined = process.env.CONTRACT_ADDRESS;
-// if (!contractAddress) {
-//   throw new Error("Please set your CONTRACT_ADDRESS in a .env file");
-// }
+export const contractAddress: string | undefined = process.env.CONTRACT_ADDRESS;
+if (!contractAddress) {
+  throw new Error("Please set your CONTRACT_ADDRESS in a .env file");
+}
 
 const chainIds = {
   "arbitrum-mainnet": 42161,

@@ -1,5 +1,1 @@
-import "./mint"
-import "./transfer"
-import "./approve"
-import "./transferFrom"
-import "./burn"
+import "./addLiquidity";
