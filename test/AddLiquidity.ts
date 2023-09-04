@@ -1,22 +1,15 @@
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { expect, util } from "chai";
-import {
-  BigNumber,
-  Contract,
-  ContractReceipt,
-  ContractTransaction,
-} from "ethers";
+import { BaseProvider } from "ethers/node_modules/@ethersproject/providers";
+import { expect } from "chai";
+import { BigNumber, Contract } from "ethers";
 import { ethers } from "hardhat";
 import {
   MyToken,
   AddLiquidity,
   MyToken__factory,
   AddLiquidity__factory,
-  IUniswapV2Factory__factory,
-  IUniswapV2Factory,
 } from "../src/types";
 import uniswapV2ContractData from "../uniswapV2ContractsData.json";
-import factoryCode from "../factoryByteCode.json";
 
 describe("AddLiquidity to Uniswap v2 contract", function () {
   let addLiquidity: AddLiquidity;
@@ -34,7 +27,7 @@ describe("AddLiquidity to Uniswap v2 contract", function () {
     user2: SignerWithAddress,
     users: SignerWithAddress[];
 
-  const provider = ethers.getDefaultProvider();
+  const provider: BaseProvider = ethers.getDefaultProvider();
 
   beforeEach(async () => {
     [owner, user1, user2, ...users] = await ethers.getSigners();
@@ -51,7 +44,6 @@ describe("AddLiquidity to Uniswap v2 contract", function () {
       uniswapV2ContractData.factory.abi,
       provider
     );
-    console.log("HERE");
     const TokenA = (await ethers.getContractFactory(
       "MyToken"
     )) as MyToken__factory;
@@ -68,7 +60,7 @@ describe("AddLiquidity to Uniswap v2 contract", function () {
   describe("Test correctness of uniswap contracts", function () {
     it("should check that bytecode of uniswap object factory is equal to actual one", async () => {
       expect(await provider.getCode(uniswapFactory.address)).to.equal(
-        factoryCode.code
+        uniswapV2ContractData.factory.bytecode
       );
     });
     it("should set the correct router and factory addresses in contracts", async () => {
@@ -127,10 +119,10 @@ describe("AddLiquidity to Uniswap v2 contract", function () {
         "Allowance for token B less than desired. Please approve the required amount"
       );
     });
-    it("should revert if zero A tokens provided", async () => {
+    it("should revert if zero tokens provided", async () => {
       await expect(
         addLiquidity.addLiquidity(tokenA.address, tokenB.address, 0, amountB)
-      ).to.be.reverted;
+      ).to.be.revertedWith("ds-math-sub-underflow");
     });
   });
 });

@@ -1,4 +1,5 @@
 import { ethers, run, network } from "hardhat";
+import uniswapV2Data from "../uniswapV2ContractsData.json";
 
 const delay = async (time: number) => {
   return new Promise((resolve: any) => {
@@ -9,10 +10,9 @@ const delay = async (time: number) => {
 };
 
 async function main() {
-  const router = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
-  const factory = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
-  const MyContract = await ethers.getContractFactory("AddLiquidity"); // Returns a contract factory,
-  // which can be used to deploy new contracts using new ContractFactory(signer: Signer, bytecode: string, interface: ContractInterface)
+  const router = uniswapV2Data.router.address;
+  const factory = uniswapV2Data.factory.address;
+  const MyContract = await ethers.getContractFactory("AddLiquidity");
   const myContract = await MyContract.deploy(router, factory);
 
   await myContract.deployed();
@@ -29,7 +29,7 @@ async function main() {
       constructorArguments: [router, factory],
     });
     console.log("verify success");
-	return;
+    return;
   } catch (e: any) {
     console.log(e.message);
   }
