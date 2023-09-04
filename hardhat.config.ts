@@ -88,6 +88,10 @@ const config: {} = {
   },
   networks: {
     hardhat: {
+      forking: {
+        url: "https://eth-mainnet.g.alchemy.com/v2/54MAlww33hGgn96f5nzHqNP47rxr1M2G",
+		blockNumber: 18042985
+      },
       accounts: {
         mnemonic,
       },

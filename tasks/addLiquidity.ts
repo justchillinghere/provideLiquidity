@@ -23,15 +23,17 @@ task(
       valueB
     );
     const allLiquidityReceipt: ContractReceipt = await addLiquidityTx.wait();
-    console.dir(allLiquidityReceipt.events);
 
-    // const event = allLiquidityReceipt.events?.find(
-    //   (event) => event.event === "Approval"
-    // );
-    // const eInitiator: Address = event?.args!["owner"];
-    // const eSpender: Address = event?.args!["spender"];
-    // const eAmount: BigNumber = event?.args!["value"];
-    // console.log(`Initiator: ${eInitiator}`);
-    // console.log(`Spender: ${eSpender}`);
-    // console.log(`Amount: ${eAmount}`);
+    const event = allLiquidityReceipt.events?.find(
+      (event) => event.event === "AddedLiquidity"
+    );
+    const addressTokenA: Address = event?.args!["TokenA"];
+    const addressTokenB: Address = event?.args!["TokenB"];
+    const creator: Address = event?.args!["creator"];
+    const pairAddress: Address = event?.args!["LPpair"];
+    console.log("Provided liquidity for a pair of tokens");
+    console.log(`Token A address: ${addressTokenA}`);
+    console.log(`Token B address: ${addressTokenB}`);
+    console.log(`Liquidity provider: ${creator}`);
+    console.log(`Pair address: ${pairAddress}`);
   });
