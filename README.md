@@ -1,8 +1,14 @@
-# Erc20 Token Implementation
+# Smart contract to add liquidity to Uniswap V2
+
+## Description
+
+This project is dedicated to learn interaction with other smart contracts from another smart contract.
+
+With this contract one can add liquidity to the Uniswap V2 decentralized exchange by providing some amounts of two tokens. This smart contract allows users to add liquidity to any pair of ERC20 tokens (or creates new one automatically) on the Uniswap V2 platform. The contract transfers the desired amounts of tokens from the sender to itself, approves the Uniswap V2 Router to spend the tokens, and then calls the addLiquidity function of the Router to add liquidity to the specified token pair. The contract emits an event with the details of the liquidity added.
 
 ## Deployed contract example
 
-You can find my deployed contract in polygon-mumbai testnet by this address: [0xFAbdA9a4C976d041AeD2f97d44D220bD11396B2f](https://mumbai.polygonscan.com/address/0xfabda9a4c976d041aed2f97d44d220bd11396b2f)
+You can find and test my deployed contract in goerli testnet by this address: [0xa3073345541e46944Cb55d565B08555AB76DB990](https://goerli.etherscan.io/address/0xa3073345541e46944Cb55d565B08555AB76DB990)
 
 ## Installation
 
@@ -19,8 +25,8 @@ Fill in all the required environment variables(copy .env-example to .env and fil
 Note:
 
 - Mnemonic is 12 words phrase you can obtain while creating a new account (in Metamask for example)
-- RPC_URL may be choosen here: https://chainlist.org/chain/80001
-- POLYGONSCAN_API_KEY may be obtained in your account profile on polygonscan
+- RPC_URL may be choosen here: https://chainlist.org
+- ETHERSCAN may be obtained in your account profile on etherscan
 
 Deploy contract to the chain (mumbai testnet):
 
@@ -35,17 +41,17 @@ Create new task(s) ans save it(them) in the folder "tasks". Add a new task name 
 Running a task:
 
 ```
-npx hardhat mint --user {USER_ADDRESS} --amount 1230000000000000000 --token {TOKEN_ADDRESS} --network polygon-mumbai
+npx hardhat addLiquidity --token-a {TOKEN_A ADDRESS} --token-b {TOKEN_B ADDRESS} --value-a 10000000 --value-b 10000000 --network goerli
 ```
 
-Note: Replace {USER_ADDRESS} with the address of the wallet and {TOKEN_ADDRESS} with the address of the token.
+Note: Replace {TOKEN\_\* ADDRESS} with the address of the token.
 
 ## Verification
 
 Verify the installation by running the following command:
 
 ```
-npx hardhat verify --network polygon-mumbai {TOKEN_ADDRESS} "MyToken" "MTK"
+npx hardhat verify --network goerli {CONTRACT_ADDRESS}
 ```
 
-Note: Replace {TOKEN_ADDRESS} with the address of the token, "MyToken" with the name of the token and "MTK" with the symbol of the token.
+Note: Replace {CONTRACT_ADDRESS} with the address of the contract
