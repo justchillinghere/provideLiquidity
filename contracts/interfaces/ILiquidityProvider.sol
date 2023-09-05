@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-interface IAddLiquidity {
+interface ILiquidityProvider {
 	event AddedLiquidity(address TokenA,
 		address TokenB, 
 		address creator, 
