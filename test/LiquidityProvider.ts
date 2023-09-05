@@ -57,7 +57,7 @@ describe("AddLiquidity to Uniswap v2 contract", function () {
   });
 
   describe("Test correctness of uniswap contracts", function () {
-    it("should check that bytecode of uniswap object factory is equal to actual one", async () => {
+    it("should check that bytecode of uniswap object factory is equal to the actual one", async () => {
       expect(await provider.getCode(uniswapFactory.address)).to.equal(
         uniswapV2ContractData.factory.bytecode
       );

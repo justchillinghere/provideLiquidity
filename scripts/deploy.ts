@@ -12,12 +12,12 @@ const delay = async (time: number) => {
 async function main() {
   const router = uniswapV2Data.router.address;
   const factory = uniswapV2Data.factory.address;
-  const MyContract = await ethers.getContractFactory("AddLiquidity");
+  const MyContract = await ethers.getContractFactory("LiquidityProvider");
   const myContract = await MyContract.deploy(router, factory);
 
   await myContract.deployed();
 
-  console.log(`MyContract contract deployed to ${myContract.address}`);
+  console.log(`The contract has been deployed to ${myContract.address}`);
 
   console.log("wait of delay...");
   await delay(30000); // delay 30 seconds
@@ -25,7 +25,7 @@ async function main() {
   try {
     await run("verify:verify", {
       address: myContract!.address,
-      contract: "contracts/AddLiquidity.sol:AddLiquidity",
+      contract: "contracts/LiquidityProvider.sol:LiquidityProvider",
       constructorArguments: [router, factory],
     });
     console.log("verify success");

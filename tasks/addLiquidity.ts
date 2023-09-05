@@ -13,7 +13,7 @@ task(
   .addParam("valueA", "Value to provide token A liquidity")
   .addParam("valueB", "Value to provide token B liquidity")
   .setAction(async ({ tokenA, tokenB, valueA, valueB }, { ethers }) => {
-    const Contract = await ethers.getContractFactory("AddLiquidity");
+    const Contract = await ethers.getContractFactory("LiquidityProvider");
     const lpContract = Contract.attach(contractAddress!);
 
     const addLiquidityTx: ContractTransaction = await lpContract.addLiquidity(

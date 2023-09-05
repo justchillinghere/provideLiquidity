@@ -25,6 +25,11 @@ if (!rpcUrl) {
   throw new Error("Please set your RPC_URL in a .env file");
 }
 
+const alchemyAPI: string | undefined = process.env.ALCHEMY_API;
+if (!alchemyAPI) {
+  throw new Error("Please set your ALCHEMY_API in a .env file");
+}
+
 export const contractAddress: string | undefined = process.env.CONTRACT_ADDRESS;
 if (!contractAddress) {
   throw new Error("Please set your CONTRACT_ADDRESS in a .env file");
@@ -89,8 +94,8 @@ const config: {} = {
   networks: {
     hardhat: {
       forking: {
-        url: "https://eth-mainnet.g.alchemy.com/v2/54MAlww33hGgn96f5nzHqNP47rxr1M2G",
-		blockNumber: 18042985
+        url: `https://eth-mainnet.g.alchemy.com/v2/${alchemyAPI}`,
+        blockNumber: 18042985,
       },
       accounts: {
         mnemonic,
